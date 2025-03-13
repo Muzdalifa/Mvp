@@ -11,5 +11,7 @@
         public bool IsActive { get; set; }
 
         public string Website { get; set; }
+
+        public ICollection<Department> Departments { get; set; } = new List<Department>();
     }
 }

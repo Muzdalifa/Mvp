@@ -1,9 +1,9 @@
-﻿namespace Mvp.Entities
-{
-    public sealed class Employee
-    {
-        public int EmployeeId { get; set; }
+﻿using Mvp.Entities;
 
+namespace Mvp.Dtos
+{
+    public sealed class EmployeeDto
+    {
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
