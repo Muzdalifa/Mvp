@@ -1,7 +1,14 @@
+using Microsoft.EntityFrameworkCore;
+using Mvp.Database;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+
+builder.Services.AddDbContext<MvpDbContext>(options => options
+    .UseSqlServer(builder.Configuration.GetConnectionString("Database")));
+
 
 var app = builder.Build();
 
@@ -20,6 +27,7 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapStaticAssets();
+app.MapControllers();
 app.MapRazorPages()
    .WithStaticAssets();
 
