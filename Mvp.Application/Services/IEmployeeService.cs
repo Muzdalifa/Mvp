@@ -14,7 +14,7 @@ namespace Mvp.Application.Services
 
         public Task<EmployeeResponseDto?> GetEmployeeById(Guid id);
 
-        public Task<EmployeeResponseDto> CreateEmployee(EmployeeRequestDto createEmployeeDto);
+        public Task<EmployeeResponseDto?> CreateEmployee(EmployeeRequestDto createEmployeeDto);
 
         public Task<EmployeeResponseDto?> UpdateEmployee(Guid id, EmployeeRequestDto updateEmployeeDto);
 

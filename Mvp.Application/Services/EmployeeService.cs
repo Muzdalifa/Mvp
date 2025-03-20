@@ -31,12 +31,17 @@ namespace Mvp.Application.Services
             return mapper.Map<EmployeeResponseDto>(employee);
         }
 
-        public async Task<EmployeeResponseDto> CreateEmployee(
+        public async Task<EmployeeResponseDto?> CreateEmployee(
             EmployeeRequestDto createEmployeeDto)
         {
             var employee = mapper.Map<Employee>(createEmployeeDto);
 
             var newEmployee = await employeeRepository.Create(employee);
+
+            if(newEmployee is null)
+            {
+                return null;
+            }
 
             return mapper.Map<EmployeeResponseDto>(newEmployee);
         }

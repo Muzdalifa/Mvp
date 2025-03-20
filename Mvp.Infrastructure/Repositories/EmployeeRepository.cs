@@ -27,10 +27,16 @@ namespace Mvp.Infrastructure.Repositories
             return employee;
         }
 
-        public async Task<Employee> Create(Employee createEmployee)
+        public async Task<Employee?> Create(Employee createEmployee)
         {
             try
             {
+                var employee = await context.Employees.FirstOrDefaultAsync(e => e.Email == createEmployee.Email);
+
+                if(employee is not null)
+                {
+                    return null;
+                }
                 await context.Employees.AddAsync(createEmployee);
 
                 await context.SaveChangesAsync();

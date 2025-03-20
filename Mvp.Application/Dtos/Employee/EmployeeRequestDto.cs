@@ -16,7 +16,7 @@ public sealed class EmployeeRequestDto
 
     public string PhoneNumber { get; set; } = string.Empty;
 
-    public DateTime HireDate { get; set; }
+    public DateTime? HireDate { get; set; } = DateTime.Now;
 
     public string Position { get; set; } = string.Empty;
 

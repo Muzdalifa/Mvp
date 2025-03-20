@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Mvp.Api.Database;
+using Mvp.Application.Dtos.Employee;
 using Mvp.Application.Services;
 using Mvp.Domain.Entities;
 
@@ -29,40 +30,26 @@ public class EmployeeController(IEmployeeService employeeService) : Controller
         return Ok(employee);
     }
 
-    //[HttpPost]
-    //public async Task<IActionResult> CreateEmployee([FromBody] Employee employee)
-    //{
-    //    if (!ModelState.IsValid)
-    //    {
-    //        return BadRequest("The given data was not on the correct format");
-    //    }
+    [HttpPost]
+    public async Task<IActionResult> CreateEmployee([FromBody] EmployeeRequestDto employee)
+    {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest();
+        }
 
-    //    var id = Guid.CreateVersion7();
+        var newEmployee = await employeeService.CreateEmployee(employee);
 
-    //    Employee newEmployee = new Employee
-    //    {
-    //        Id = id,
-    //        FirstName = employee.FirstName,
-    //        LastName = employee.LastName,
-    //        Email = employee.Email,
-    //        PhoneNumber = employee.PhoneNumber,
-    //        ManagerId = employee.ManagerId,
-    //        HireDate = employee.HireDate,
-    //        Position = employee.Position,
-    //    };
+        if(newEmployee is null)
+        {
+            return Ok("Employee is already exist");
+        }
 
-    //    await context.Employees.AddAsync(newEmployee);
-
-    //    await context.SaveChangesAsync();
-
-    //    return CreatedAtAction(
-    //        nameof(GetEmployee),
-    //        new { id = employee.Id },
-    //        employee);
-    //}
+        return CreatedAtAction(nameof(GetEmployee), new { id = newEmployee.Id }, newEmployee);
+    }
 
     //[HttpPut("{id}")]
-    //public async Task<IActionResult> UpdateEmployee(Guid id, [FromBody] Employee updateEmployee)
+    //public async Task<IActionResult> UpdateEmployee(Guid id, [FromBody] EmployeeRequestDto updateEmployee)
     //{
     //    Employee? employee = await context.Employees
     //        .FirstOrDefaultAsync(c => c.Id == id);

@@ -13,7 +13,7 @@ namespace Mvp.Infrastructure.Repositories
 
         public Task<Employee?> GetById(Guid id);
 
-        public Task<Employee> Create(Employee company);
+        public Task<Employee?> Create(Employee company);
 
         public Task<Employee?> Update(Guid id, Employee company);
 
