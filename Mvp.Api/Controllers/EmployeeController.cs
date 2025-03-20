@@ -16,20 +16,18 @@ public class EmployeeController(IEmployeeService employeeService) : Controller
         return Ok(await employeeService.GetEmployees());
     }
 
-    //[HttpGet("{id}")]
-    //public async Task<IActionResult> GetEmployee(Guid id)
-    //{
-    //    var employee = await context.Employees
-    //        .Where(c => c.Id == id)
-    //        .FirstOrDefaultAsync();
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetEmployee(Guid id)
+    {
+        var employee = await employeeService.GetEmployeeById(id);
 
-    //    if (employee == null)
-    //    {
-    //        return NotFound();
-    //    }
+        if (employee == null)
+        {
+            return NotFound();
+        }
 
-    //    return Ok(employee);
-    //}
+        return Ok(employee);
+    }
 
     //[HttpPost]
     //public async Task<IActionResult> CreateEmployee([FromBody] Employee employee)
