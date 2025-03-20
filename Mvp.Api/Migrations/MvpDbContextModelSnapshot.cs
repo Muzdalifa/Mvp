@@ -333,7 +333,7 @@ namespace Mvp.Api.Migrations
             modelBuilder.Entity("Mvp.Domain.Entities.Department", b =>
                 {
                     b.HasOne("Mvp.Domain.Entities.Company", "Company")
-                        .WithMany("Departments")
+                        .WithMany()
                         .HasForeignKey("CompanyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -344,7 +344,7 @@ namespace Mvp.Api.Migrations
             modelBuilder.Entity("Mvp.Domain.Entities.Employee", b =>
                 {
                     b.HasOne("Mvp.Domain.Entities.Company", "Company")
-                        .WithMany("Employees")
+                        .WithMany()
                         .HasForeignKey("CompanyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -376,13 +376,6 @@ namespace Mvp.Api.Migrations
                     b.Navigation("Department");
 
                     b.Navigation("Employee");
-                });
-
-            modelBuilder.Entity("Mvp.Domain.Entities.Company", b =>
-                {
-                    b.Navigation("Departments");
-
-                    b.Navigation("Employees");
                 });
 
             modelBuilder.Entity("Mvp.Domain.Entities.Department", b =>

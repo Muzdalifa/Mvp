@@ -18,7 +18,7 @@ public sealed class Company: Entity
 
     public bool IsActive { get; set; }
 
-    public ICollection<Employee> Employees { get; set; }
+    //public ICollection<Employee> Employees { get; set; }
 
-    public ICollection<Department> Departments { get; set; }
+    //public ICollection<Department> Departments { get; set; }
 }
