@@ -15,13 +15,13 @@ namespace Mvp.Api.Database.Configurations
             builder.Property(c => c.Website).IsRequired();
             builder.Property(c => c.Description).HasMaxLength(500);
 
-            builder.HasMany(c => c.Departments)
-                .WithOne(c => c.Company)
-                .HasForeignKey(c => c.CompanyId);
+            //builder.HasMany(c => c.Departments)
+            //    .WithOne(c => c.Company)
+            //    .HasForeignKey(c => c.CompanyId);
 
-            builder.HasMany(c => c.Employees)
-                .WithOne(c => c.Company)
-                .HasForeignKey(c => c.CompanyId);
+            //builder.HasMany(c => c.Employees)
+            //    .WithOne(c => c.Company)
+            //    .HasForeignKey(c => c.CompanyId);
         }
     }
 }

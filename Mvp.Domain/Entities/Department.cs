@@ -10,7 +10,7 @@ public sealed class Department: Entity
 
     public Guid CompanyId { get; set; }
 
-    public Company Company { get; set; }
+    public Company? Company { get; set; }
 
-    public ICollection<EmployeeDepartment> EmployeeDepartments { get; set; }
+    public ICollection<EmployeeDepartment>? EmployeeDepartments { get; set; }
 }

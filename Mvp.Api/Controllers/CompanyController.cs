@@ -22,7 +22,7 @@ public class CompanyController(MvpDbContext context) : Controller()
             .Where(c => c.Id == id)
             .FirstOrDefaultAsync();
 
-        if(company == null)
+        if (company == null)
         {
             return NotFound();
         }
@@ -40,7 +40,7 @@ public class CompanyController(MvpDbContext context) : Controller()
 
         var id = Guid.CreateVersion7();
 
-        var newCompany = new Company
+        Company newCompany = new Company
         {
             Id = id,
             Name = company.Name,
@@ -57,5 +57,59 @@ public class CompanyController(MvpDbContext context) : Controller()
             nameof(GetCompany),
             new { id = company.Id },
             company);
+    }
+
+    [HttpPut("{id}")]
+    public async Task<IActionResult> UpdateCompany(Guid id, [FromBody] Company updateCompany)
+    {
+        Company? company = await context.Companies
+            .FirstOrDefaultAsync(c => c.Id == id);
+
+        if (company is null)
+        {
+            return NotFound();
+        }
+
+        if (!ModelState.IsValid)
+        {
+            return BadRequest();
+        }
+
+        company.Name = updateCompany.Name;
+        company.Address = updateCompany.Address;
+        company.Description = updateCompany.Description;
+        company.IsActive = updateCompany.IsActive;
+        company.Website = updateCompany.Website;
+
+        await context.SaveChangesAsync();
+        return NoContent();
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteCompany(Guid id)
+    {
+        Company? company = await FindCompany(id);
+
+        if(company is null)
+        {
+            return NotFound();
+        }
+
+        context.Companies.Remove(company);
+
+        await context.SaveChangesAsync();
+
+        return NoContent();
+    }
+
+    private async Task<Company?> FindCompany(Guid id)
+    {
+        if (id == Guid.Empty)
+            return null;
+
+        Company? company = await context.Companies
+            .FirstOrDefaultAsync(c => c.Id == id);
+
+        return company;
     }
 }
