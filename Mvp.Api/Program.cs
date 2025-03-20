@@ -1,5 +1,6 @@
 using Mvp.Api.Database;
 using Mvp.Api.Database.Extensions;
+using Mvp.Application.Mappings;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,8 @@ builder.Services.AddOpenApi();
 builder.AddDatabase();
 
 builder.Services.AddDbContext<MvpDbContext>();
+
+builder.Services.RegisterAutoMappings();
 
 var app = builder.Build();
 
