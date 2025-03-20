@@ -3,17 +3,20 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Mvp.Api.Database;
 
 #nullable disable
 
-namespace Mvp.Api.Migrations
+namespace Mvp.Infrastructure.Migrations
 {
     [DbContext(typeof(MvpDbContext))]
-    partial class MvpDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250320075512_InitialMigration")]
+    partial class InitialMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
