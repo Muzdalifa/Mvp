@@ -23,12 +23,23 @@ builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
 builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("developmentPlicy",
+                      policy =>
+                      {
+                          policy.WithOrigins("*");
+                      });
+});
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
+
+app.UseCors("developmentPlicy");
 
 app.UseHttpsRedirection();
 

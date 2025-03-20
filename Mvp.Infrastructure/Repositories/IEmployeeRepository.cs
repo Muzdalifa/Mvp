@@ -9,7 +9,7 @@ namespace Mvp.Infrastructure.Repositories
 {
     public interface IEmployeeRepository
     {
-        public Task<IEnumerable<Employee>> Get();
+        public Task<IEnumerable<Employee>> Get(string? filter, string? text);
 
         public Task<Employee?> GetById(Guid id);
 
