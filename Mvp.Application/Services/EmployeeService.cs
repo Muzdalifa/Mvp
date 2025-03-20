@@ -13,9 +13,9 @@ namespace Mvp.Application.Services
     public sealed class EmployeeService(
         IEmployeeRepository employeeRepository, IMapper mapper) : IEmployeeService
     {
-        public async Task<IEnumerable<EmployeeResponseDto>> GetEmployees()
+        public async Task<IEnumerable<EmployeeResponseDto>> GetEmployees(string? filter, string? text)
         {
-            var employees =  await employeeRepository.Get();
+            var employees =  await employeeRepository.Get(filter, text);
             return mapper.Map<IEnumerable<EmployeeResponseDto>>(employees);
         }
 

@@ -10,7 +10,7 @@ namespace Mvp.Application.Services
 {
     public interface IEmployeeService
     {
-        public Task<IEnumerable<EmployeeResponseDto>> GetEmployees();
+        public Task<IEnumerable<EmployeeResponseDto>> GetEmployees(string? filter, string? text);
 
         public Task<EmployeeResponseDto?> GetEmployeeById(Guid id);
 

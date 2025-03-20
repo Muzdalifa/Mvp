@@ -9,9 +9,9 @@ namespace Mvp.Api.Controllers;
 public class EmployeeController(IEmployeeService employeeService) : Controller
 {
     [HttpGet]
-    public async Task<IActionResult> GetEmployees()
+    public async Task<IActionResult> GetEmployees([FromQuery] string? filter, [FromQuery] string? text)
     {
-        return Ok(await employeeService.GetEmployees());
+        return Ok(await employeeService.GetEmployees(filter, text));
     }
 
     [HttpGet("{id}")]
