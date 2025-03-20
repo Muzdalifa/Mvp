@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Mvp.Api.Database;
 using Mvp.Application.Dtos.Employee;
 using Mvp.Application.Services;
-using Mvp.Domain.Entities;
 
 namespace Mvp.Api.Controllers;
 
@@ -31,7 +28,8 @@ public class EmployeeController(IEmployeeService employeeService) : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateEmployee([FromBody] EmployeeRequestDto employee)
+    public async Task<IActionResult> CreateEmployee([
+        FromBody] EmployeeRequestDto employee)
     {
         if (!ModelState.IsValid)
         {
@@ -45,11 +43,13 @@ public class EmployeeController(IEmployeeService employeeService) : Controller
             return Ok("Employee is already exist");
         }
 
-        return CreatedAtAction(nameof(GetEmployee), new { id = newEmployee.Id }, newEmployee);
+        return CreatedAtAction(
+            nameof(GetEmployee), new { id = newEmployee.Id }, newEmployee);
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateEmployee(Guid id, [FromBody] EmployeeRequestDto updateEmployee)
+    public async Task<IActionResult> UpdateEmployee(
+        Guid id, [FromBody] EmployeeRequestDto updateEmployee)
     {
         if (!ModelState.IsValid)
         {
@@ -69,31 +69,21 @@ public class EmployeeController(IEmployeeService employeeService) : Controller
         }
     }
 
-    //[HttpDelete("{id}")]
-    //public async Task<IActionResult> DeleteEmployee(Guid id)
-    //{
-    //    Employee? employee = await FindEmployee(id);
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteEmployee(Guid id)
+    {
+        if (id == Guid.Empty)
+        {
+            return BadRequest();
+        }
 
-    //    if (employee is null)
-    //    {
-    //        return NotFound();
-    //    }
-
-    //    context.Employees.Remove(employee);
-
-    //    await context.SaveChangesAsync();
-
-    //    return NoContent();
-    //}
-
-    //private async Task<Employee?> FindEmployee(Guid id)
-    //{
-    //    if (id == Guid.Empty)
-    //        return null;
-
-    //    Employee? employee = await context.Employees
-    //        .FirstOrDefaultAsync(c => c.Id == id);
-
-    //    return employee;
-    //}
+        if (await employeeService.DeleteEmployee(id))
+        {
+            return NoContent();
+        }
+        else
+        {
+            return NotFound();
+        }
+    }
 }
