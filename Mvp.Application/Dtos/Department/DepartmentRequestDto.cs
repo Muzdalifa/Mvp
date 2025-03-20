@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Mvp.Application.Dtos
+namespace Mvp.Application.Dtos.Department
 {
-    public sealed class DepartmentResponseDto
+    public sealed class DepartmentRequestDto
     {
         public string Name { get; set; } = string.Empty;
 

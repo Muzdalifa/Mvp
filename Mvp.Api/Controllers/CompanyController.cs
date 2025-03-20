@@ -33,7 +33,7 @@ public class CompanyController(ICompanyService companyService) : Controller()
     {
         if (!ModelState.IsValid)
         {
-            return BadRequest("The given data was not on the correct format");
+            return BadRequest();
         }
 
         var newCompany = await companyService.CreateCompany(createCompany);

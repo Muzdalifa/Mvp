@@ -17,6 +17,7 @@ public static class AutoMapperConfiguration
         {
             mc.AddProfile(new EmployeeMappingProfile());
             mc.AddProfile(new CompanyMappingProfile());
+            mc.AddProfile(new DepartmentMappingProfile());
         });
 
         IMapper mapper = mapperConfig.CreateMapper();
