@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Mvp.Api.Database.Extensions;
 using Mvp.Domain.Entities;
 
 namespace Mvp.Api.Database
@@ -9,7 +10,7 @@ namespace Mvp.Api.Database
 
         public DbSet<Department> Departments { get; set; }
 
-        public DbSet<Employee> Employee { get; set; }
+        public DbSet<Employee> Employees { get; set; }
 
         public DbSet<EmployeeDepartment> EmployeeDepartments { get; set; }
 
@@ -17,6 +18,7 @@ namespace Mvp.Api.Database
         {
             modelBuilder.HasDefaultSchema(Schema.MVP);
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(MvpDbContext).Assembly);
+            modelBuilder.SeedData();
         }
     }
 }

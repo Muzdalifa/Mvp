@@ -9,6 +9,7 @@ namespace Mvp.Api.Database.Configurations
         public void Configure(EntityTypeBuilder<Company> builder)
         {
             builder.HasKey(c => c.Id);
+            builder.Property(e => e.Id).ValueGeneratedOnAdd();
             builder.Property(c => c.Name).HasMaxLength(500).IsRequired();
             builder.Property(c => c.Address).HasMaxLength(500).IsRequired();
             builder.Property(c => c.Website).IsRequired();

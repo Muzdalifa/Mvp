@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Mvp.Api.Database;
 
-namespace Mvp.Api.Extensions
+namespace Mvp.Api.Database.Extensions
 {
     public static class DatabaseExtensions
     {
@@ -13,7 +13,7 @@ namespace Mvp.Api.Extensions
                     {
                         options.UseSqlServer(
                             builder.Configuration.GetConnectionString("Database"),
-                            config => config.MigrationsAssembly(typeof(MvpDbContext).Assembly));
+                            config => config.MigrationsAssembly(typeof(MvpDbContext).Assembly));                       
                     });
         }
     }

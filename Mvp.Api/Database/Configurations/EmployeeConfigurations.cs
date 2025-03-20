@@ -9,6 +9,7 @@ public sealed class EmployeeConfigurations : IEntityTypeConfiguration<Employee>
     public void Configure(EntityTypeBuilder<Employee> builder)
     {
         builder.HasKey(e => e.Id);
+        builder.Property(e => e.Id).ValueGeneratedOnAdd();
         builder.Property(e => e.FirstName).HasMaxLength(500).IsRequired();
         builder.Property(e => e.LastName).HasMaxLength(500).IsRequired();
         builder.Property(e => e.Email).HasMaxLength(100).IsRequired();
@@ -19,11 +20,6 @@ public sealed class EmployeeConfigurations : IEntityTypeConfiguration<Employee>
         builder.HasOne(e => e.Manager)
             .WithMany()
             .HasForeignKey(e => e.ManagerId)
-            .OnDelete(DeleteBehavior.Restrict);
-
-        builder.HasOne(e => e.Company)
-            .WithMany(c => c.Employees)
-            .HasForeignKey(c => c.Id)
             .OnDelete(DeleteBehavior.Restrict);
 
         builder.HasMany(e => e.EmployeeDepartments)
