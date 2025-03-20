@@ -1,4 +1,5 @@
-﻿using Mvp.Domain.Entities;
+﻿using Mvp.Application.Dtos.Employee;
+using Mvp.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +10,14 @@ namespace Mvp.Application.Services
 {
     public interface IEmployeeService
     {
-        public Task<IEnumerable<Employee>> GetEmployees();
+        public Task<IEnumerable<EmployeeResponseDto>> GetEmployees();
 
-        public Task<Employee> GetEmployeeById();
+        public Task<EmployeeResponseDto?> GetEmployeeById(Guid id);
+
+        public Task<EmployeeResponseDto> CreateEmployee(EmployeeRequestDto createEmployeeDto);
+
+        public Task<EmployeeResponseDto?> UpdateEmployee(Guid id, EmployeeRequestDto updateEmployeeDto);
+
+        public Task<bool> DeleteEmployee(Guid id);
     }
 }

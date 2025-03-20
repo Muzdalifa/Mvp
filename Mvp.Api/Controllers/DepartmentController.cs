@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Mvp.Api.Database;
 using Mvp.Application.Dtos.Department;
 using Mvp.Application.Services;
-using Mvp.Domain.Entities;
 
 namespace Mvp.Api.Controllers;
 
