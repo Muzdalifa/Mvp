@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Mvp.Application.Dtos
+namespace Mvp.Application.Dtos.Employee
 {
     public sealed class EmployeeResponseDto: Entity
     {

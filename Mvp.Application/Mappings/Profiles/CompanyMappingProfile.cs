@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Mvp.Application.Dtos;
+using Mvp.Application.Dtos.Company;
 using Mvp.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -19,6 +19,8 @@ namespace Mvp.Application.Mappings.Profiles
             CreateMap<Company, CompanyRequestDto>();
 
             CreateMap<Company, CompanyResponseDto>().ReverseMap();
+
+            CreateMap<UpdateCompanyDto, Company>().ReverseMap();
         }
     }
 }

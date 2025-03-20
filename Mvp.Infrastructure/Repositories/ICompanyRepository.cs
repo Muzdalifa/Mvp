@@ -17,6 +17,6 @@ namespace Mvp.Infrastructure.Repositories
 
         public Task<Company?> Update(Guid id, Company company);
 
-        public Task Delete(Guid id);
+        public Task<bool> Delete(Guid id);
     }
 }

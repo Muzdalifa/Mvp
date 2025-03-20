@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace Mvp.Infrastructure.Repositories
 {
@@ -45,14 +46,42 @@ namespace Mvp.Infrastructure.Repositories
             return newCompany;
         }
 
-        public async Task Delete(Guid id)
+        public async Task<Company?> Update(Guid id, Company updateCompany)
         {
-            throw new NotImplementedException();
+            var company = await GetById(id);
+
+            if(company is null)
+            {
+                return null;
+            }
+
+            company.Name = updateCompany.Name;
+            company.Address = updateCompany.Address;
+            company.Description = updateCompany.Description;
+            company.IsActive = updateCompany.IsActive;
+            company.Website = updateCompany.Website;
+
+            await context.SaveChangesAsync();
+
+            return company;
         }
 
-        public async Task<Company?> Update(Guid id, Company company)
+        public async Task<bool> Delete(Guid id)
         {
-            throw new NotImplementedException();
+            var company = await GetById(id);
+
+            if (company is not null)
+            {
+                context.Companies.Remove(company);
+
+                await context.SaveChangesAsync();
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

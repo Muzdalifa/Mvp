@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Mvp.Application.Dtos
+namespace Mvp.Application.Dtos.Company
 {
     public sealed class CompanyRequestDto
     {

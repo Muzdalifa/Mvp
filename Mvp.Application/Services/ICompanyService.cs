@@ -1,4 +1,4 @@
-﻿using Mvp.Application.Dtos;
+﻿using Mvp.Application.Dtos.Company;
 using Mvp.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -16,8 +16,8 @@ namespace Mvp.Application.Services
 
         public Task<CompanyResponseDto> CreateCompany(CompanyRequestDto createCompanyDto);
 
-        public Task<CompanyResponseDto> UpdateCompany(CompanyResponseDto updateCompanyDto);
+        public Task<CompanyResponseDto?> UpdateCompany(Guid id, CompanyRequestDto updateCompanyDto);
 
-        public Task DeleteCompany(Guid id);
+        public Task<bool> DeleteCompany(Guid id);
     }
 }

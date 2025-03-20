@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Mvp.Application.Dtos;
+using Mvp.Application.Dtos.Company;
 using Mvp.Domain.Entities;
 using Mvp.Infrastructure.Repositories;
 using System;
@@ -39,14 +39,34 @@ namespace Mvp.Application.Services
             return mapper.Map<CompanyResponseDto>(newCompany);
         }
 
-        public Task DeleteCompany(Guid id)
+        public async Task<CompanyResponseDto?> UpdateCompany(Guid id, CompanyRequestDto updateCompanyDto)
         {
-            throw new NotImplementedException();
+            if(id != Guid.Empty)
+            {
+                var mappedCompany = mapper.Map<Company>(updateCompanyDto);
+
+                var updatedCompany = await companyRepository.Update(id, mappedCompany);
+
+                return mapper.Map<CompanyResponseDto>(updatedCompany);
+            }
+            else
+            {
+                return null;
+            }   
         }
 
-        public Task<CompanyResponseDto> UpdateCompany(CompanyResponseDto updateCompanyDto)
+        public async Task<bool> DeleteCompany(Guid id)
         {
-            throw new NotImplementedException();
+            if(id != Guid.Empty)
+            {
+               return await companyRepository.Delete(id);               
+            }
+            else
+            {
+                return false;
+            }
         }
+
+        
     }
 }

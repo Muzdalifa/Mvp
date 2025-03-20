@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Mvp.Application.Dtos;
+using Mvp.Application.Dtos.Employee;
 using Mvp.Domain.Entities;
 using System;
 using System.Collections.Generic;
