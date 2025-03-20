@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Mvp.Application\Mvp.Application.csproj" />
     <ProjectReference Include="..\Mvp.Domain\Mvp.Domain.csproj" />
   </ItemGroup>
 

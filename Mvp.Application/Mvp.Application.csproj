@@ -2,4 +2,7 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Mvp.Domain\Mvp.Domain.csproj" />
+  </ItemGroup>
 </Project>
