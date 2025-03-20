@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Mvp.Api.Database;
+using Mvp.Application.Dtos.Department;
 using Mvp.Application.Services;
 using Mvp.Domain.Entities;
 
@@ -29,60 +30,38 @@ public class DepartmentController(IDepartmentService departmentService) : Contro
         return Ok(department);
     }
 
-    //[HttpPost]
-    //public async Task<IActionResult> CreateDepartment([FromBody] Department department)
-    //{
-    //    if (!ModelState.IsValid)
-    //    {
-    //        return BadRequest();
-    //    }
+    [HttpPost]
+    public async Task<IActionResult> CreateDepartment([FromBody] DepartmentRequestDto department)
+    {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest();
+        }
 
-    //    var id = Guid.CreateVersion7();
+        var newCompany = await departmentService.CreateDepartment(department);
 
-    //    Department newDepartment = new Department
-    //    {
-    //        Id = id,
-    //        Name = department.Name,
-    //        Location = department.Location,
-    //        CompanyId = department.CompanyId,
-    //        Description = department.Description
-    //    };
+        return CreatedAtAction(nameof(GetDepartment), new { id = newCompany.Id }, newCompany);
+    }
 
-    //    await context.Departments.AddAsync(newDepartment);
+    [HttpPut("{id}")]
+    public async Task<IActionResult> UpdateDepartment(Guid id, [FromBody] DepartmentRequestDto updateDepartment)
+    {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest();
+        }
 
-    //    await context.SaveChangesAsync();
+        var updatedDepartment = await departmentService.UpdateDepartment(id, updateDepartment);
 
-    //    return CreatedAtAction(
-    //        nameof(GetDepartment),
-    //        new { id = department.Id },
-    //        department);
-    //}
-
-    //[HttpPut("{id}")]
-    //public async Task<IActionResult> UpdateDepartment(Guid id, [FromBody] Department updateDepartment)
-    //{
-    //    Department? department = await context.Departments
-    //        .FirstOrDefaultAsync(c => c.Id == id);
-
-    //    if (department is null)
-    //    {
-    //        return NotFound();
-    //    }
-
-    //    if (!ModelState.IsValid)
-    //    {
-    //        return BadRequest();
-    //    }
-
-    //    department.Name = updateDepartment.Name;
-    //    department.Location = updateDepartment.Location;
-    //    department.Description = updateDepartment.Description;
-    //    department.CompanyId = updateDepartment.CompanyId;
-
-    //    await context.SaveChangesAsync();
-
-    //    return NoContent();
-    //}
+        if (updatedDepartment is null)
+        {
+            return BadRequest();
+        }
+        else
+        {
+            return NoContent();
+        }
+    }
 
     //[HttpDelete("{id}")]
     //public async Task<IActionResult> DeleteDepartment(Guid id)
