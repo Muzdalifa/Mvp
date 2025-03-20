@@ -31,7 +31,8 @@ public class DepartmentController(IDepartmentService departmentService) : Contro
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateDepartment([FromBody] DepartmentRequestDto department)
+    public async Task<IActionResult> CreateDepartment(
+        [FromBody] DepartmentRequestDto department)
     {
         if (!ModelState.IsValid)
         {
@@ -44,14 +45,16 @@ public class DepartmentController(IDepartmentService departmentService) : Contro
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateDepartment(Guid id, [FromBody] DepartmentRequestDto updateDepartment)
+    public async Task<IActionResult> UpdateDepartment(
+        Guid id, [FromBody] DepartmentRequestDto updateDepartment)
     {
         if (!ModelState.IsValid)
         {
             return BadRequest();
         }
 
-        var updatedDepartment = await departmentService.UpdateDepartment(id, updateDepartment);
+        var updatedDepartment = await departmentService.UpdateDepartment(
+            id, updateDepartment);
 
         if (updatedDepartment is null)
         {
@@ -63,21 +66,21 @@ public class DepartmentController(IDepartmentService departmentService) : Contro
         }
     }
 
-    //[HttpDelete("{id}")]
-    //public async Task<IActionResult> DeleteDepartment(Guid id)
-    //{
-    //    Department? department = await FindDepartment(id);
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteDepartment(Guid id)
+    {
+        if (id == Guid.Empty)
+        {
+            return BadRequest();
+        }
 
-    //    if (department is null)
-    //    {
-    //        return NotFound();
-    //    }
-
-    //    context.Departments.Remove(department);
-
-    //    await context.SaveChangesAsync();
-
-    //    return NoContent();
-    //}
-
+        if (await departmentService.DeleteDepartment(id))
+        {
+            return NoContent();
+        }
+        else
+        {
+            return NotFound();
+        }
+    }
 }
