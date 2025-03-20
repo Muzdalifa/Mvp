@@ -48,34 +48,26 @@ public class EmployeeController(IEmployeeService employeeService) : Controller
         return CreatedAtAction(nameof(GetEmployee), new { id = newEmployee.Id }, newEmployee);
     }
 
-    //[HttpPut("{id}")]
-    //public async Task<IActionResult> UpdateEmployee(Guid id, [FromBody] EmployeeRequestDto updateEmployee)
-    //{
-    //    Employee? employee = await context.Employees
-    //        .FirstOrDefaultAsync(c => c.Id == id);
+    [HttpPut("{id}")]
+    public async Task<IActionResult> UpdateEmployee(Guid id, [FromBody] EmployeeRequestDto updateEmployee)
+    {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest();
+        }
 
-    //    if (employee is null)
-    //    {
-    //        return NotFound();
-    //    }
+        var updatedEmployee = await employeeService.UpdateEmployee(
+            id, updateEmployee);
 
-    //    if (!ModelState.IsValid)
-    //    {
-    //        return BadRequest();
-    //    }
-
-    //    employee.FirstName = updateEmployee.FirstName;
-    //    employee.LastName = updateEmployee.LastName;
-    //    employee.Email = updateEmployee.Email;
-    //    employee.Position = updateEmployee.Position;
-    //    employee.HireDate = updateEmployee.HireDate;
-    //    employee.ManagerId = updateEmployee.ManagerId;
-    //    employee.PhoneNumber = updateEmployee.PhoneNumber;
-
-    //    await context.SaveChangesAsync();
-
-    //    return NoContent();
-    //}
+        if (updatedEmployee is null)
+        {
+            return BadRequest();
+        }
+        else
+        {
+            return NoContent();
+        }
+    }
 
     //[HttpDelete("{id}")]
     //public async Task<IActionResult> DeleteEmployee(Guid id)
