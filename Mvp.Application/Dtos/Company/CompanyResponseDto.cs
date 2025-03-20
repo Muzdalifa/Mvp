@@ -1,12 +1,13 @@
-﻿using System;
+﻿using Mvp.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Mvp.Application.Dtos;
+namespace Mvp.Application.Dtos.Company;
 
-public sealed class CompanyDto
+public sealed class CompanyResponseDto: Entity
 {
     public string Name { get; set; } = string.Empty;
 

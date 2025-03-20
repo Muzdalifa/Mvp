@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Mvp.Application.Dtos;
+namespace Mvp.Application.Dtos.Employee;
 
-public sealed class EmployeeDto
+public sealed class EmployeeRequestDto
 {
     public string FirstName { get; set; } = string.Empty;
 
@@ -16,7 +16,7 @@ public sealed class EmployeeDto
 
     public string PhoneNumber { get; set; } = string.Empty;
 
-    public DateTime HireDate { get; set; }
+    public DateTime? HireDate { get; set; } = DateTime.Now;
 
     public string Position { get; set; } = string.Empty;
 
@@ -25,5 +25,4 @@ public sealed class EmployeeDto
     public string? ManagerName { get; set; }
 
     public Guid CompanyId { get; set; }
-
 }

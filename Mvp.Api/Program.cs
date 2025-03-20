@@ -1,6 +1,8 @@
 using Mvp.Api.Database;
 using Mvp.Api.Database.Extensions;
 using Mvp.Application.Mappings;
+using Mvp.Application.Services;
+using Mvp.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +15,13 @@ builder.AddDatabase();
 builder.Services.AddDbContext<MvpDbContext>();
 
 builder.Services.RegisterAutoMappings();
+
+builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();
+builder.Services.AddScoped<ICompanyService, CompanyService>();
+builder.Services.AddScoped<IDepartmentService, DepartmentService>();
+builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 
 var app = builder.Build();
 
