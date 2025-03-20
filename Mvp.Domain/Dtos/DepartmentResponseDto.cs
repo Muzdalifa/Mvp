@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Mvp.Application.Dtos
 {
-    public sealed class DepartmentDto
+    public sealed class DepartmentResponseDto
     {
         public string Name { get; set; } = string.Empty;
 

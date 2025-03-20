@@ -3,6 +3,6 @@
     <PackageReference Include="AutoMapper" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Mvp.Domain\Mvp.Domain.csproj" />
+    <ProjectReference Include="..\Mvp.Infrastructure\Mvp.Infrastructure.csproj" />
   </ItemGroup>
 </Project>

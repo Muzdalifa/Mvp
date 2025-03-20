@@ -13,7 +13,7 @@ namespace Mvp.Application.Mappings.Profiles
     {
         public EmployeeMappingProfile()
         {
-            CreateMap<Employee, EmployeeDto>()
+            CreateMap<Employee, EmployeeRequestDto>()
                .ForMember(dest => dest.ManagerName, opt =>
                {
                    opt.MapFrom(src =>

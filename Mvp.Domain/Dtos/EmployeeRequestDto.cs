@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Mvp.Application.Dtos;
 
-public sealed class EmployeeDto
+public sealed class EmployeeRequestDto
 {
     public string FirstName { get; set; } = string.Empty;
 
@@ -25,5 +25,4 @@ public sealed class EmployeeDto
     public string? ManagerName { get; set; }
 
     public Guid CompanyId { get; set; }
-
 }

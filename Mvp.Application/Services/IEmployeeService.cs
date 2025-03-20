@@ -9,6 +9,8 @@ namespace Mvp.Application.Services
 {
     public interface IEmployeeService
     {
-        public Task<Employee> GetEmployees();
+        public Task<IEnumerable<Employee>> GetEmployees();
+
+        public Task<Employee> GetEmployeeById();
     }
 }
