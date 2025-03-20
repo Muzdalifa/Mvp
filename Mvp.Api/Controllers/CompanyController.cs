@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Mvp.Api.Database;
+using Mvp.Application.Dtos;
 using Mvp.Application.Services;
 using Mvp.Domain.Entities;
 
@@ -16,49 +17,31 @@ public class CompanyController(ICompanyService companyService) : Controller()
         return Ok(await companyService.GetCompanies());
     }
 
-    //[HttpGet("{id}")]
-    //public async Task<IActionResult> GetCompany(Guid id)
-    //{
-    //    var company = await context.Companies
-    //        .Where(c => c.Id == id)
-    //        .FirstOrDefaultAsync();
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetCompany(Guid id)
+    {
+        var company = await companyService.GetCompanyById(id);
 
-    //    if (company == null)
-    //    {
-    //        return NotFound();
-    //    }
+        if (company == null)
+        {
+            return NotFound();
+        }
 
-    //    return Ok(company);
-    //}
+        return Ok(company);
+    }
 
-    //[HttpPost]
-    //public async Task<IActionResult> CreateCompany([FromBody] Company company)
-    //{
-    //    if (!ModelState.IsValid)
-    //    {
-    //        return BadRequest("The given data was not on the correct format");
-    //    }
+    [HttpPost]
+    public async Task<IActionResult> CreateCompany([FromBody] CompanyRequestDto createCompany)
+    {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest("The given data was not on the correct format");
+        }
 
-    //    var id = Guid.CreateVersion7();
+        var newCompany = await companyService.CreateCompany(createCompany);
 
-    //    Company newCompany = new Company
-    //    {
-    //        Id = id,
-    //        Name = company.Name,
-    //        Address = company.Address,
-    //        IsActive = company.IsActive,
-    //        Website = company.Website
-    //    };
-
-    //    await context.Companies.AddAsync(newCompany);
-
-    //    await context.SaveChangesAsync();
-
-    //    return CreatedAtAction(
-    //        nameof(GetCompany),
-    //        new { id = company.Id },
-    //        company);
-    //}
+        return Ok(newCompany);
+    }
 
     //[HttpPut("{id}")]
     //public async Task<IActionResult> UpdateCompany(Guid id, [FromBody] Company updateCompany)

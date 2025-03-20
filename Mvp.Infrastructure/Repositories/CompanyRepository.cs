@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Mvp.Api.Database;
-using Mvp.Application.Dtos;
 using Mvp.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -17,9 +16,33 @@ namespace Mvp.Infrastructure.Repositories
             return await context.Companies.ToListAsync();
         }
 
-        public Task<CompanyResponseDto> Create(CompanyResponseDto company)
+        public async Task<Company?> GetById(Guid id)
         {
-            throw new NotImplementedException();
+            var company = await context.Companies
+            .Where(c => c.Id == id)
+            .FirstOrDefaultAsync();
+
+            return company;
+        }
+
+        public async Task<Company> Create(Company createCompany)
+        {
+            var id = Guid.CreateVersion7();
+
+            Company newCompany = new Company
+            {
+                Id = id,
+                Name = createCompany.Name,
+                Address = createCompany.Address,
+                IsActive = createCompany.IsActive,
+                Website = createCompany.Website
+            };
+
+            await context.Companies.AddAsync(newCompany);
+
+            await context.SaveChangesAsync();
+
+            return newCompany;
         }
 
         public async Task Delete(Guid id)
@@ -27,12 +50,7 @@ namespace Mvp.Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
-        public async Task<Company?> GetById(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<Company> Update(Guid id, CompanyResponseDto company)
+        public async Task<Company?> Update(Guid id, Company company)
         {
             throw new NotImplementedException();
         }

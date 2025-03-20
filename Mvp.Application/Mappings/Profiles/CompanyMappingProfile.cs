@@ -13,7 +13,12 @@ namespace Mvp.Application.Mappings.Profiles
     {
         public CompanyMappingProfile()
         {
-            CreateMap<Company, CompanyResponseDto>().ReverseMap();  
+            CreateMap<CompanyRequestDto, Company>()
+                .ForMember(dest => dest.Id, opt =>opt.MapFrom(src => Guid.CreateVersion7()));
+
+            CreateMap<Company, CompanyRequestDto>();
+
+            CreateMap<Company, CompanyResponseDto>().ReverseMap();
         }
     }
 }

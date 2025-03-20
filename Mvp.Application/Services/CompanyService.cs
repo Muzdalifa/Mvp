@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Mvp.Application.Dtos;
+using Mvp.Domain.Entities;
 using Mvp.Infrastructure.Repositories;
 using System;
 using System.Collections.Generic;
@@ -13,21 +14,32 @@ namespace Mvp.Application.Services
     {
         public async Task<IEnumerable<CompanyResponseDto>> GetCompanies()
         {
-            var company =  await companyRepository.Get();
-            return mapper.Map<IEnumerable<CompanyResponseDto>>(company);
+            var companies =  await companyRepository.Get();
+            return mapper.Map<IEnumerable<CompanyResponseDto>>(companies);
         }
 
-        public Task<CompanyResponseDto> CreateCompany(CompanyResponseDto createCompanyDto)
+        public async Task<CompanyResponseDto?> GetCompanyById(Guid id)
         {
-            throw new NotImplementedException();
+            var company = await companyRepository.GetById(id);
+
+            if(company is null)
+            {
+                return null;
+            }
+
+            return mapper.Map<CompanyResponseDto>(company);
+        }
+
+        public async Task<CompanyResponseDto> CreateCompany(CompanyRequestDto createCompanyDto)
+        {
+            var company = mapper.Map<Company>(createCompanyDto);
+
+            var newCompany = await companyRepository.Create(company);
+
+            return mapper.Map<CompanyResponseDto>(newCompany);
         }
 
         public Task DeleteCompany(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<CompanyResponseDto> GetCompanyById(Guid id)
         {
             throw new NotImplementedException();
         }

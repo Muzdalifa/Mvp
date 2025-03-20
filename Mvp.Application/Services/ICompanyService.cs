@@ -12,9 +12,9 @@ namespace Mvp.Application.Services
     {
         public Task<IEnumerable<CompanyResponseDto>> GetCompanies();
 
-        public Task<CompanyResponseDto> GetCompanyById(Guid id);
+        public Task<CompanyResponseDto?> GetCompanyById(Guid id);
 
-        public Task<CompanyResponseDto> CreateCompany(CompanyResponseDto createCompanyDto);
+        public Task<CompanyResponseDto> CreateCompany(CompanyRequestDto createCompanyDto);
 
         public Task<CompanyResponseDto> UpdateCompany(CompanyResponseDto updateCompanyDto);
 
